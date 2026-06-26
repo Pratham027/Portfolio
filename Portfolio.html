@@ -1,0 +1,701 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pratham Chavda </title>
+<meta name="description" content="Pratham Chavda — Computer Science undergraduate, full-stack developer and security-minded builder.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600;700&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#0A0E13;
+    --paper-raised:#10161D;
+    --ink:#DCE6EC;
+    --ink-soft:#8A98A6;
+    --ink-faint:#566270;
+    --line:#1C242D;
+    --line-strong:#2B3540;
+    --signal:#4FD1C5;
+    --signal-soft:#4FD1C51A;
+    --stamp:#E8A33D;
+    --crit:#E8584A;
+    --mono:'IBM Plex Mono', monospace;
+    --sans:'IBM Plex Mono', monospace;
+    --serif:'IBM Plex Sans', sans-serif;
+  }
+
+  *{margin:0;padding:0;box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+
+  body{
+    background:var(--paper);
+    color:var(--ink);
+    font-family:var(--sans);
+    line-height:1.65;
+    -webkit-font-smoothing:antialiased;
+    font-size:14.5px;
+  }
+
+  body{
+    background-image:
+      linear-gradient(rgba(79,209,197,0.025) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(79,209,197,0.025) 1px, transparent 1px),
+      radial-gradient(ellipse 70% 50% at 50% -10%, rgba(79,209,197,0.07), transparent);
+    background-size: 34px 34px, 34px 34px, auto;
+    position:relative;
+  }
+  body::after{
+    content:"";
+    position:fixed; inset:0; pointer-events:none; z-index:9999;
+    background:repeating-linear-gradient(
+      to bottom,
+      rgba(0,0,0,0) 0px,
+      rgba(0,0,0,0) 1px,
+      rgba(79,209,197,0.012) 2px,
+      rgba(0,0,0,0) 3px
+    );
+  }
+
+  a{color:inherit;text-decoration:none;}
+  ::selection{background:var(--signal);color:var(--paper);}
+  :focus-visible{outline:1.5px solid var(--signal);outline-offset:3px;}
+
+  .wrap{max-width:980px;margin:0 auto;padding:0 28px;}
+
+  .case-id{
+    font-family:var(--mono);
+    font-size:11.5px;
+    letter-spacing:0.06em;
+    color:var(--signal);
+    text-transform:uppercase;
+    opacity:0.85;
+  }
+  .case-id::before{content:"// ";color:var(--ink-faint);}
+
+  .field-label{
+    font-family:var(--mono);
+    font-size:10.5px;
+    letter-spacing:0.1em;
+    text-transform:uppercase;
+    color:var(--ink-faint);
+  }
+  .field-label::before{content:"[ ";color:var(--line-strong);}
+  .field-label::after{content:" ]";color:var(--line-strong);}
+
+  /* ---------- NAV ---------- */
+  nav{
+    position:sticky;top:0;z-index:50;
+    background:rgba(10,14,19,0.85);
+    backdrop-filter:blur(8px);
+    border-bottom:1px solid var(--line);
+  }
+  .nav-inner{
+    max-width:980px;margin:0 auto;padding:18px 28px;
+    display:flex;align-items:center;justify-content:space-between;
+  }
+  .logo{font-family:var(--mono);font-weight:600;font-size:15.5px;letter-spacing:0.01em;}
+  .logo em{font-style:normal;color:var(--signal);}
+  .logo::before{content:"~/ ";color:var(--ink-faint);font-weight:400;}
+  .navlinks{display:flex;gap:30px;font-family:var(--mono);font-size:12px;color:var(--ink-soft);text-transform:uppercase;letter-spacing:0.05em;}
+  .navlinks a{position:relative;padding-bottom:3px;transition:color .15s;}
+  .navlinks a::before{content:"";}
+  .navlinks a:hover{color:var(--signal);}
+  .navlinks a:hover::before{content:"> ";color:var(--signal);position:absolute;left:-16px;}
+
+  /* ---------- HERO — terminal window ---------- */
+  .hero{padding:64px 0 56px;}
+  .case-header{
+    border:1px solid var(--line-strong);
+    background:var(--paper-raised);
+    position:relative;
+    box-shadow:0 0 0 1px rgba(79,209,197,0.06), 0 30px 60px -30px rgba(0,0,0,0.6);
+  }
+  .case-header::before{
+    content:"";
+    position:absolute; inset:0;
+    border:1px solid var(--signal);
+    opacity:0.08;
+    pointer-events:none;
+  }
+  .case-top{
+    display:flex;justify-content:space-between;align-items:center;
+    padding:14px 20px;
+    border-bottom:1px solid var(--line);
+    background:linear-gradient(180deg, rgba(255,255,255,0.02), transparent);
+  }
+  .case-top .case-id{font-size:12px;}
+  .case-top .case-id::before{content:"";}
+  .term-dots{display:flex;gap:7px;}
+  .term-dots span{width:9px;height:9px;border-radius:50%;display:block;}
+  .term-dots span:nth-child(1){background:#E8584A;}
+  .term-dots span:nth-child(2){background:#E8A33D;}
+  .term-dots span:nth-child(3){background:#4FD1C5;}
+  .stamp{
+    font-family:var(--mono);
+    font-size:11px;
+    letter-spacing:0.08em;
+    color:var(--stamp);
+    border:1px solid var(--stamp);
+    background:#E8A33D14;
+    padding:5px 11px;
+    text-transform:uppercase;
+    border-radius:3px;
+    display:inline-flex;align-items:center;gap:6px;
+  }
+  .stamp::before{
+    content:"";display:block;width:6px;height:6px;border-radius:50%;
+    background:var(--stamp);
+    box-shadow:0 0 6px var(--stamp);
+    animation:blink-dot 1.6s ease-in-out infinite;
+  }
+  @keyframes blink-dot{0%,100%{opacity:1;}50%{opacity:0.25;}}
+  .case-main{padding:40px 32px 36px;}
+  .subject-label{
+    font-family:var(--mono);
+    font-size:11px;
+    color:var(--ink-faint);
+    text-transform:uppercase;
+    letter-spacing:0.1em;
+    margin-bottom:14px;
+    display:flex;align-items:center;gap:8px;
+  }
+  .subject-label::before{content:"$";color:var(--signal);}
+  .hero-name{
+    font-family:var(--mono);
+    font-weight:600;
+    font-size:clamp(32px,6vw,52px);
+    line-height:1.08;
+    letter-spacing:-0.01em;
+    color:var(--ink);
+  }
+  .hero-name::after{
+    content:"";
+    display:inline-block;
+    width:0.5ch;height:0.85em;
+    background:var(--signal);
+    margin-left:10px;
+    vertical-align:-0.08em;
+    animation:cursor-blink 1.1s steps(1) infinite;
+  }
+  @keyframes cursor-blink{0%,49%{opacity:1;}50%,100%{opacity:0;}}
+  .hero-role{
+    font-family:var(--serif);
+    font-size:clamp(15px,2vw,16.5px);
+    color:var(--ink-soft);
+    max-width:610px;
+    margin-top:18px;
+    line-height:1.7;
+  }
+  .hero-role b{color:var(--signal);font-weight:600;}
+
+  .case-meta-row{
+    display:flex;gap:36px;flex-wrap:wrap;
+    margin-top:30px;
+    padding-top:24px;
+    border-top:1px dashed var(--line-strong);
+  }
+  .meta-item .field-label{margin-bottom:6px;}
+  .meta-item .meta-val{font-family:var(--mono);font-size:13px;color:var(--ink);}
+
+  .hero-actions{display:flex;gap:12px;flex-wrap:wrap;margin-top:32px;}
+  .btn{
+    font-family:var(--mono);
+    font-size:12.5px;
+    font-weight:500;
+    letter-spacing:0.03em;
+    padding:13px 22px;
+    display:inline-flex;align-items:center;gap:8px;
+    border-radius:3px;
+    transition:transform .15s, background .15s, color .15s, border-color .15s, box-shadow .15s;
+  }
+  .btn-primary{background:var(--signal);color:#06151A;}
+  .btn-primary:hover{background:#6BE0D5;transform:translateY(-1px);box-shadow:0 8px 20px -8px rgba(79,209,197,0.5);}
+  .btn-ghost{border:1px solid var(--line-strong);color:var(--ink);background:transparent;}
+  .btn-ghost:hover{border-color:var(--signal);color:var(--signal);transform:translateY(-1px);}
+
+  /* ---------- SECTION shared ---------- */
+  section{padding:64px 0;border-top:1px solid var(--line);}
+  .sec-head{
+    display:flex;justify-content:space-between;align-items:flex-end;
+    margin-bottom:36px;
+    gap:20px;
+    flex-wrap:wrap;
+  }
+  .sec-title{
+    font-family:var(--mono);
+    font-weight:600;
+    font-size:clamp(21px,3vw,25px);
+    margin-top:8px;
+    color:var(--ink);
+    display:flex;align-items:center;gap:10px;
+  }
+  .sec-title::before{content:"#";color:var(--signal);font-weight:400;opacity:0.7;}
+  .sec-sub{font-family:var(--serif);color:var(--ink-soft);max-width:480px;font-size:14px;margin-top:9px;line-height:1.6;}
+  .sec-count{font-family:var(--mono);font-size:12px;color:var(--ink-faint);white-space:nowrap;border:1px solid var(--line-strong);padding:4px 10px;border-radius:3px;}
+
+  /* ---------- STACK — ledger table ---------- */
+  .ledger{border-top:1px solid var(--line-strong);}
+  .ledger-row{
+    display:grid;
+    grid-template-columns:160px 1fr;
+    gap:24px;
+    padding:18px 0;
+    border-bottom:1px solid var(--line);
+  }
+  .ledger-row .field-label{padding-top:3px;}
+  .ledger-items{display:flex;flex-wrap:wrap;gap:8px;}
+  .chip{
+    font-family:var(--mono);
+    font-size:12.5px;
+    color:var(--ink-soft);
+    padding:5px 10px;
+    border:1px solid var(--line-strong);
+    background:var(--paper-raised);
+    border-radius:3px;
+    transition:border-color .15s, color .15s;
+  }
+  .chip:hover{border-color:var(--signal);color:var(--signal);}
+
+  /* ---------- EXPERIENCE — finding entries ---------- */
+  .finding{
+    display:grid;
+    grid-template-columns:170px 1fr;
+    gap:30px;
+    padding:30px 0;
+    border-top:1px solid var(--line-strong);
+  }
+  .finding:first-child{border-top:none;}
+  .finding-meta{padding-top:2px;}
+  .finding-meta .case-id{font-size:11.5px;display:block;margin-bottom:8px;}
+  .finding-meta .case-id::before{content:"";}
+  .status-chip{
+    display:inline-flex;align-items:center;gap:6px;
+    font-family:var(--mono);font-size:10.5px;letter-spacing:0.05em;
+    text-transform:uppercase;
+    padding:4px 9px;
+    border-radius:3px;
+  }
+  .status-chip::before{content:"";display:block;width:6px;height:6px;border-radius:50%;}
+  .status-active{background:var(--signal-soft);color:var(--signal);border:1px solid var(--signal);}
+  .status-active::before{background:var(--signal);box-shadow:0 0 6px var(--signal);animation:blink-dot 1.6s ease-in-out infinite;}
+  .status-closed{background:transparent;color:var(--ink-faint);border:1px solid var(--line-strong);}
+  .status-closed::before{background:var(--ink-faint);}
+
+  .role-title{font-family:var(--mono);font-weight:600;font-size:17.5px;color:var(--ink);}
+  .role-org{font-family:var(--mono);color:var(--ink-soft);font-size:13px;margin-top:5px;}
+  .role-org a:hover{color:var(--signal);}
+  .role-desc{margin-top:15px;color:var(--ink-soft);font-size:14px;font-family:var(--serif);}
+  .role-desc ul{padding-left:0;list-style:none;margin-top:6px;}
+  .role-desc li{
+    margin-bottom:10px;
+    padding-left:20px;
+    position:relative;
+  }
+  .role-desc li::before{
+    content:">";
+    position:absolute;left:0;top:0;
+    color:var(--signal);
+    font-family:var(--mono);
+  }
+  .role-tags{display:flex;gap:8px;flex-wrap:wrap;margin-top:16px;}
+
+  /* ---------- PROJECTS ---------- */
+  .proj-list{border-top:1px solid var(--line-strong);}
+  .proj-row{
+    padding:30px 0;
+    border-bottom:1px solid var(--line);
+    display:grid;
+    grid-template-columns:1fr 280px;
+    gap:32px;
+  }
+  .proj-head{display:flex;align-items:baseline;gap:14px;margin-bottom:5px;}
+  .proj-name{font-family:var(--mono);font-weight:600;font-size:18px;}
+  .proj-class{
+    font-family:var(--mono);
+    font-size:10.5px;
+    letter-spacing:0.06em;
+    text-transform:uppercase;
+    padding:3px 8px;
+    border-radius:3px;
+  }
+  .class-primary{background:#E8584A14;color:var(--crit);border:1px solid var(--crit);}
+  .class-secondary{background:transparent;color:var(--ink-faint);border:1px solid var(--line-strong);}
+  .proj-tagline{font-family:var(--mono);font-size:12px;color:var(--signal);margin-bottom:14px;opacity:0.85;}
+  .proj-desc{color:var(--ink-soft);font-size:14px;font-family:var(--serif);}
+  .proj-desc ul{list-style:none;}
+  .proj-desc li{margin-bottom:10px;padding-left:20px;position:relative;}
+  .proj-desc li::before{content:">";position:absolute;left:0;top:0;color:var(--signal);font-family:var(--mono);}
+  .proj-side{
+    border-left:1px solid var(--line);
+    padding-left:28px;
+  }
+  .proj-side .field-label{margin-bottom:10px;}
+  .proj-stack{display:flex;flex-wrap:wrap;gap:7px;}
+
+  /* ---------- EDUCATION ---------- */
+  .edu-grid{border-top:1px solid var(--line-strong);}
+  .edu-row{
+    display:grid;
+    grid-template-columns:1fr auto auto;
+    gap:20px;align-items:baseline;
+    padding:20px 0;
+    border-bottom:1px solid var(--line);
+  }
+  .edu-school{font-family:var(--mono);font-weight:600;font-size:15.5px;}
+  .edu-degree{color:var(--ink-soft);font-size:13px;margin-top:3px;font-family:var(--serif);}
+  .edu-score{font-family:var(--mono);color:var(--signal);font-size:13.5px;white-space:nowrap;}
+  .edu-year{font-family:var(--mono);color:var(--ink-faint);font-size:12px;white-space:nowrap;}
+
+  /* ---------- CERTS ---------- */
+  .cert-grid{border-top:1px solid var(--line-strong);}
+  .cert-row{
+    display:flex;align-items:baseline;gap:14px;
+    padding:16px 0;
+    border-bottom:1px solid var(--line);
+    font-size:14px;color:var(--ink-soft);
+    font-family:var(--serif);
+  }
+  .cert-row .case-id{color:var(--signal);min-width:80px;}
+  .cert-row .case-id::before{content:"✓ ";}
+
+  /* ---------- CONTACT ---------- */
+  .contact-panel{
+    border:1px solid var(--line-strong);
+    background:var(--paper-raised);
+    padding:52px 48px;
+    position:relative;
+    box-shadow:0 0 0 1px rgba(79,209,197,0.05);
+  }
+  .contact-panel::before{
+    content:"";position:absolute;inset:0;border:1px solid var(--signal);opacity:0.07;pointer-events:none;
+  }
+  .contact-inner{position:relative;}
+  .contact-panel .sec-title{margin-bottom:12px;}
+  .contact-grid{display:flex;gap:12px;flex-wrap:wrap;margin-top:28px;}
+
+  footer{
+    padding:30px 0 56px;
+    font-family:var(--mono);
+    font-size:11.5px;
+    color:var(--ink-faint);
+    display:flex;
+    justify-content:space-between;
+    flex-wrap:wrap;
+    gap:8px;
+    border-top:1px solid var(--line);
+  }
+
+  @media (max-width: 760px){
+    .navlinks{display:none;}
+    .finding{grid-template-columns:1fr;gap:10px;}
+    .proj-row{grid-template-columns:1fr;}
+    .proj-side{border-left:none;border-top:1px solid var(--line);padding-left:0;padding-top:18px;margin-top:6px;}
+    .edu-row{grid-template-columns:1fr;gap:5px;}
+    .ledger-row{grid-template-columns:1fr;gap:8px;}
+    .contact-panel{padding:36px 24px;}
+    .case-top{flex-direction:column;gap:14px;}
+    .case-meta-row{gap:24px;}
+  }
+
+  @media (prefers-reduced-motion: reduce){
+    *{transition:none !important;animation:none !important;}
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <div class="logo">Pratham Chavda<em>.</em></div>
+    <div class="navlinks">
+      <a href="#stack">Stack</a>
+      <a href="#experience">Experience</a>
+      <a href="#projects">Projects</a>
+      <a href="#education">Education</a>
+      <a href="#contact">Contact</a>
+    </div>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="wrap">
+    <div class="case-header">
+      <div class="case-top">
+        <div class="term-dots"><span></span><span></span><span></span></div>
+        <span class="case-id">Vadodara, Gujarat, India</span>
+        <span class="stamp">Open to work</span>
+      </div>
+      <div class="case-main">
+        <div class="subject-label">Subject</div>
+        <h1 class="hero-name">Pratham Chavda</h1>
+        <p class="hero-role">
+          Computer Science undergraduate who ships production software. <b>Full-stack developer</b>
+          with a security-first lens — built a scanner around the OWASP Top 10, then shipped a
+          live quiz platform end-to-end in a single month.
+        </p>
+
+        <div class="case-meta-row">
+          <div class="meta-item">
+            <div class="field-label">Current role</div>
+            <div class="meta-val">Software Engineer Intern, HankersNest</div>
+          </div>
+          <div class="meta-item">
+            <div class="field-label">Focus areas</div>
+            <div class="meta-val">Full-stack web · CyberSecurity</div>
+          </div>
+          <div class="meta-item">
+            <div class="field-label">Education</div>
+            <div class="meta-val">B.Tech CSD, GCET — 2027</div>
+          </div>
+        </div>
+
+        <div class="hero-actions">
+          <a class="btn btn-primary" href="#projects">View projects →</a>
+          <a class="btn btn-ghost" href="https://mail.google.com/mail/?view=cm&fs=1&to=pratham27022005@gmail.com&su=Reaching%20out%20from%20your%20portfolio" target="_blank" rel="noopener">Get in touch</a>
+          <a class="btn btn-ghost" href="https://github.com/Pratham027" target="_blank" rel="noopener">GitHub ↗</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<section id="stack">
+  <div class="wrap">
+    <div class="sec-head">
+      <div>
+        <div class="case-id">Inventory</div>
+        <h2 class="sec-title">Stack</h2>
+        <p class="sec-sub">What I reach for, by category — chosen for the job, not the trend.</p>
+      </div>
+    </div>
+
+    <div class="ledger">
+      <div class="ledger-row">
+        <div class="field-label">Languages</div>
+        <div class="ledger-items">
+          <span class="chip">Python</span><span class="chip">JavaScript</span><span class="chip">Dart</span><span class="chip">C</span><span class="chip">HTML / CSS</span>
+        </div>
+      </div>
+      <div class="ledger-row">
+        <div class="field-label">Frameworks</div>
+        <div class="ledger-items">
+          <span class="chip">Next.js</span><span class="chip">React.js</span><span class="chip">Node.js / Express</span><span class="chip">Flutter</span><span class="chip">Flask</span><span class="chip">Tailwind CSS</span>
+        </div>
+      </div>
+      <div class="ledger-row">
+        <div class="field-label">Data</div>
+        <div class="ledger-items">
+          <span class="chip">MongoDB</span><span class="chip">MySQL</span><span class="chip">Firebase / Firestore</span>
+        </div>
+      </div>
+      <div class="ledger-row">
+        <div class="field-label">Tools &amp; practice</div>
+        <div class="ledger-items">
+          <span class="chip">Git</span><span class="chip">TortoiseSVN</span><span class="chip">OWASP ZAP</span><span class="chip">JWT</span><span class="chip">REST APIs</span><span class="chip">CI/CD</span><span class="chip">Postman</span><span class="chip">Figma</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="experience">
+  <div class="wrap">
+    <div class="sec-head">
+      <div>
+        <div class="case-id">Record of work</div>
+        <h2 class="sec-title">Experience</h2>
+        <p class="sec-sub">Two internships, two different problems — one shipped fast on the web, one real-time on mobile.</p>
+      </div>
+      <span class="sec-count">2 entries</span>
+    </div>
+
+    <div>
+      <div class="finding">
+        <div class="finding-meta">
+          <span class="case-id">MAY 2026 — JUN 2026</span>
+          <span class="status-chip status-active">In production</span>
+        </div>
+        <div>
+          <div class="role-title">Software Engineer Intern</div>
+          <div class="role-org">HankersNest, Vadodara · <a href="https://mathsgo.hankersnest.com" target="_blank" rel="noopener">mathsgo.hankersnest.com ↗</a></div>
+          <div class="role-desc">
+            <ul>
+              <li>Built and shipped <b style="color:var(--ink)">MathsGo</b>, a live quiz platform, from scratch to production within one month — owned architecture, implementation, and deployment end-to-end.</li>
+              <li>Designed daily quiz logic, streak tracking, leaderboards, and user profile management; wired every frontend view to backend REST APIs for consistent app-wide state.</li>
+              <li>Delivered under a RAD model with TortoiseSVN version control and CI/CD pipelines, enabling multiple rapid release cycles inside the delivery window.</li>
+              <li>Product is live today and listed in HankersNest's official software portfolio.</li>
+            </ul>
+          </div>
+          <div class="role-tags">
+            <span class="chip">Next.js</span><span class="chip">REST APIs</span><span class="chip">CI/CD</span><span class="chip">TortoiseSVN</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="finding">
+        <div class="finding-meta">
+          <span class="case-id">JAN 2024 — JUL 2024</span>
+          <span class="status-chip status-closed">Closed</span>
+        </div>
+        <div>
+          <div class="role-title">Flutter Developer Intern</div>
+          <div class="role-org">Aarya SoftEx LLP, Vadodara</div>
+          <div class="role-desc">
+            <ul>
+              <li>Built a production cross-platform Android app in Flutter spanning 10+ screens, including authentication flows and a real-time chat feature for instant messaging between users.</li>
+              <li>Integrated Firebase Authentication and Cloud Firestore for secure session management and real-time data sync across clients.</li>
+              <li>Adopted the Provider pattern for state management — cut unnecessary widget rebuilds and improved long-term maintainability.</li>
+            </ul>
+          </div>
+          <div class="role-tags">
+            <span class="chip">Flutter</span><span class="chip">Firebase</span><span class="chip">Firestore</span><span class="chip">Provider</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="projects">
+  <div class="wrap">
+    <div class="sec-head">
+      <div>
+        <div class="case-id">Independent work</div>
+        <h2 class="sec-title">Projects</h2>
+        <p class="sec-sub">A security scanner and an expense-splitting app — one finds problems, the other solves one.</p>
+      </div>
+      <span class="sec-count">2 entries</span>
+    </div>
+
+    <div class="proj-list">
+      <div class="proj-row">
+        <div>
+          <div class="proj-head">
+            <span class="proj-name">VulnScan</span>
+            <span class="proj-class class-primary">Primary build</span>
+          </div>
+          <div class="proj-tagline">Web vulnerability scanner — OWASP Top 10 coverage</div>
+          <div class="proj-desc">
+            <ul>
+              <li>Automates scanning via the OWASP ZAP API — no per-scan manual configuration needed.</li>
+              <li>JWT-based auth with per-user dashboards showing scan history and severity tiers (Critical / High / Medium / Low) for fast triage.</li>
+              <li>Structured reporting pipeline ranks findings by severity, cutting the time to spot what actually matters.</li>
+            </ul>
+          </div>
+        </div>
+        <div class="proj-side">
+          <div class="field-label">Built with</div>
+          <div class="proj-stack">
+            <span class="chip">React.js</span><span class="chip">Node.js</span><span class="chip">Express</span><span class="chip">MongoDB</span><span class="chip">OWASP ZAP</span><span class="chip">JWT</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="proj-row">
+        <div>
+          <div class="proj-head">
+            <span class="proj-name">SplitWise</span>
+            <span class="proj-class class-secondary">Side build</span>
+          </div>
+          <div class="proj-tagline">Expense management web app</div>
+          <div class="proj-desc">
+            <ul>
+              <li>RESTful Flask backend handling auth, group management, and automated expense-splitting logic, persisted in MongoDB.</li>
+              <li>Settlement calculation logic — each member's net balance updates automatically as expenses are added.</li>
+              <li>Responsive HTML/CSS/JS frontend for adding expenses, viewing balances, and tracking settlements in real time.</li>
+            </ul>
+          </div>
+        </div>
+        <div class="proj-side">
+          <div class="field-label">Built with</div>
+          <div class="proj-stack">
+            <span class="chip">Python</span><span class="chip">Flask</span><span class="chip">MongoDB</span><span class="chip">JavaScript</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="education">
+  <div class="wrap">
+    <div class="sec-head">
+      <div>
+        <div class="case-id">Academic record</div>
+        <h2 class="sec-title">Education</h2>
+      </div>
+    </div>
+
+    <div class="edu-grid">
+      <div class="edu-row">
+        <div>
+          <div class="edu-school">G.H. Patel College of Engineering and Technology (GCET)</div>
+          <div class="edu-degree">B.Tech — Computer Science and Design</div>
+        </div>
+        <div class="edu-score">CGPA 7.48 / 10</div>
+        <div class="edu-year">2024 – 2027</div>
+      </div>
+      <div class="edu-row">
+        <div>
+          <div class="edu-school">ITM SLS Baroda University (ITMBU)</div>
+          <div class="edu-degree">Diploma — Computer Science and Engineering</div>
+        </div>
+        <div class="edu-score">CGPA 7.24 / 10</div>
+        <div class="edu-year">2021 – 2024</div>
+      </div>
+      <div class="edu-row">
+        <div>
+          <div class="edu-school">Gujarat Secondary and Higher Secondary Education Board (GSEB)</div>
+          <div class="edu-degree">SSC (10th)</div>
+        </div>
+        <div class="edu-score">85th percentile</div>
+        <div class="edu-year">2020 – 2021</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="certs">
+  <div class="wrap">
+    <div class="sec-head">
+      <div>
+        <div class="case-id">Credentials</div>
+        <h2 class="sec-title">Certifications</h2>
+      </div>
+    </div>
+    <div class="cert-grid">
+      <div class="cert-row"><span class="case-id">VERIFIED</span> Python Programming — Infosys Springboard</div>
+      <div class="cert-row"><span class="case-id">VERIFIED</span> Introduction to IoT — NPTEL, IIT Kharagpur</div>
+    </div>
+  </div>
+</section>
+
+<section id="contact">
+  <div class="wrap">
+    <div class="contact-panel">
+      <div class="contact-inner">
+        <div class="case-id">Close the file</div>
+        <h2 class="sec-title">Let's build something</h2>
+        <p class="sec-sub">Open to internships and full-time roles in full-stack development and security engineering.</p>
+        <div class="contact-grid">
+          <a class="btn btn-primary" href="https://mail.google.com/mail/?view=cm&fs=1&to=pratham27022005@gmail.com&su=Reaching%20out%20from%20your%20portfolio" target="_blank" rel="noopener">Email via Gmail</a>
+          <a class="btn btn-ghost" href="https://www.linkedin.com/in/pratham-chavda-119536263" target="_blank" rel="noopener">LinkedIn ↗</a>
+          <a class="btn btn-ghost" href="https://github.com/Pratham027" target="_blank" rel="noopener">GitHub ↗</a>
+          <a class="btn btn-ghost" href="tel:+919426902897">+91 94269 02897</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap" style="display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px;">
+    <span>Vadodara, Gujarat, India</span>
+    <span>pratham27022005@gmail.com</span>
+  </div>
+</footer>
+
+</body>
+</html>
